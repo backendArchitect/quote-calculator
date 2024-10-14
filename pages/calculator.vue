@@ -7,8 +7,10 @@
       <EventSelector @complete-selection="completeSelection" />
     </template>
     <template v-else>
-      <QuotationSummary />
-      <button @click="resetCalculator">Start New Quotation</button>
+      <QuotationSummary :formData="formData" />
+      <button @click="resetCalculator" class="reset-button">
+        Start New Quotation
+      </button>
     </template>
   </div>
 </template>
@@ -25,9 +27,11 @@ const { selectedEvents, selectedExtras, totalAmount } =
 
 const formSubmitted = ref(false);
 const selectionCompleted = ref(false);
+const formData = ref(null);
 
-function handleFormSubmit(formData: any) {
-  console.log("Form data:", formData);
+function handleFormSubmit(data: any) {
+  console.log("Form data:", data);
+  formData.value = data;
   formSubmitted.value = true;
 }
 
@@ -40,5 +44,59 @@ function resetCalculator() {
   selectionCompleted.value = false;
   selectedEvents.value = [];
   selectedExtras.value = [];
+  formData.value = null;
 }
 </script>
+
+<style scoped>
+#app {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+}
+
+.reset-button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto 0;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #2980b9;
+}
+
+.reset-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+}
+
+@media (max-width: 600px) {
+  #app {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+}
+</style>

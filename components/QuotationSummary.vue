@@ -2,6 +2,13 @@
 <template>
   <div class="quotation-summary">
     <h2>Quotation Summary</h2>
+    <div class="form-data-summary" v-if="formData">
+      <h3>Event Details</h3>
+      <p><strong>Person Name:</strong> {{ formData.personName }}</p>
+      <p><strong>Date:</strong> {{ formData.date }}</p>
+      <p><strong>Place:</strong> {{ formData.place }}</p>
+      <p><strong>Time:</strong> {{ formData.time }}</p>
+    </div>
     <div
       v-for="event in selectedEvents"
       :key="event.name"
@@ -33,6 +40,13 @@
 <script setup lang="ts">
 import { useQuotationCalculator } from "../composables/useQuotationCalculator";
 
+const props = defineProps({
+  formData: {
+    type: Object,
+    required: true,
+  },
+});
+
 const { selectedEvents, selectedExtras, totalAmount } =
   useQuotationCalculator();
 </script>
@@ -44,6 +58,7 @@ const { selectedEvents, selectedExtras, totalAmount } =
   font-family: Arial, sans-serif;
 }
 
+.form-data-summary,
 .event-summary,
 .extras-summary {
   margin-bottom: 20px;

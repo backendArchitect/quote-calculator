@@ -15,6 +15,8 @@ export const events = [
   { name: "SUFI NIGHT", category: "complex" },
   { name: "WEDDING", category: "complex" },
   { name: "RECEPTION", category: "complex" },
+  { name: "2 EVENTS", category: "twofunction" },
+  { name: "3 EVENTS", category: "threefunction" },
 ];
 
 export const services = {
@@ -45,6 +47,20 @@ export const services = {
     { name: "SameDayEdit", price: 15000 },
     { name: "Youtube Live", price: 15000 },
     { name: "AI Scanner", price: 5000 },
+  ],
+  twofunction: [
+    { name: "Candid photographer", price: 30000 },
+    { name: "Ceremony Photographer", price: 22000 },
+    { name: "Traditional videographer", price: 24000 },
+    { name: "Cinematographer", price: 40000 },
+    { name: "Drone", price: 20000 },
+  ],
+  threefunction: [
+    { name: "Candid photographer", price: 38000 },
+    { name: "Ceremony Photographer", price: 29000 },
+    { name: "Traditional videographer", price: 30000 },
+    { name: "Cinematographer", price: 45000 },
+    { name: "Drone", price: 20000 },
   ],
 };
 
