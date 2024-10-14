@@ -42,8 +42,24 @@
       </div>
     </div>
 
+    <div class="discount-section">
+      <h3>Discount</h3>
+      <div class="discount-input">
+        <input
+          type="number"
+          v-model.number="discount"
+          min="0"
+          max="100"
+          @input="updateDiscount"
+        />
+        <span>%</span>
+      </div>
+    </div>
+
     <div class="total-section">
-      <h3>Current Total: {{ totalAmount }} INR</h3>
+      <h3>Subtotal: {{ subtotal }} INR</h3>
+      <h3>Discount: {{ discountAmount }} INR</h3>
+      <h3>Total: {{ totalAmount }} INR</h3>
     </div>
 
     <button @click="completeSelection" class="complete-button">
@@ -53,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useQuotationCalculator } from "../composables/useQuotationCalculator";
 
 const {
@@ -62,13 +78,18 @@ const {
   extras,
   selectedEvents,
   selectedExtras,
+  subtotal,
+  discountPercentage,
+  discountAmount,
   totalAmount,
   selectEvent,
   selectExtra,
+  setDiscount,
 } = useQuotationCalculator();
 
 const emit = defineEmits(["complete-selection"]);
 const openEvents = ref<Set<string>>(new Set());
+const discount = ref(0);
 
 function toggleEvent(eventName: string) {
   if (openEvents.value.has(eventName)) {
@@ -109,6 +130,14 @@ function updateExtraQuantity(
   const quantity = parseInt((event.target as HTMLInputElement).value) || 0;
   selectExtra(extra, quantity);
 }
+
+function updateDiscount() {
+  setDiscount(discount.value);
+}
+
+watch(discountPercentage, (newValue) => {
+  discount.value = newValue;
+});
 
 function completeSelection() {
   emit("complete-selection");
@@ -189,6 +218,20 @@ h3 {
   padding: 5px;
   border: 1px solid #ddd;
   border-radius: 3px;
+}
+
+.discount-section {
+  margin-top: 20px;
+}
+
+.discount-input {
+  display: flex;
+  align-items: center;
+}
+
+.discount-input input {
+  width: 60px;
+  margin-right: 5px;
 }
 
 .total-section {

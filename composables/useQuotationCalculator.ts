@@ -11,9 +11,10 @@ const selectedEvents = ref<
 const selectedExtras = ref<
   Array<{ name: string; price: number; quantity: number }>
 >([]);
+const discountPercentage = ref(0);
 
 export function useQuotationCalculator() {
-  const totalAmount = computed(() => {
+  const subtotal = computed(() => {
     const eventsTotal = selectedEvents.value.reduce((total, event) => {
       return (
         total +
@@ -29,6 +30,18 @@ export function useQuotationCalculator() {
     );
     return eventsTotal + extrasTotal;
   });
+
+  const discountAmount = computed(() => {
+    return (subtotal.value * discountPercentage.value) / 100;
+  });
+
+  const totalAmount = computed(() => {
+    return subtotal.value - discountAmount.value;
+  });
+
+  function setDiscount(percentage: number) {
+    discountPercentage.value = percentage;
+  }
 
   function selectEvent(
     eventName: string,
@@ -83,8 +96,12 @@ export function useQuotationCalculator() {
     extras,
     selectedEvents,
     selectedExtras,
+    subtotal,
+    discountPercentage,
+    discountAmount,
     totalAmount,
     selectEvent,
     selectExtra,
+    setDiscount,
   };
 }

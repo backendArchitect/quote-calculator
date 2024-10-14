@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
       <label for="time">Time:</label>
-      <input type="time" id="time" v-model="time" required />
+      <input type="time" id="time" v-model="time" />
     </div>
     <div class="form-group">
       <label for="personName">Person Name:</label>

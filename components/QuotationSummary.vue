@@ -32,6 +32,8 @@
       </ul>
     </div>
     <div class="total-summary">
+      <h3>Subtotal: {{ subtotal }} INR</h3>
+      <h3>Discount ({{ discountPercentage }}%): {{ discountAmount }} INR</h3>
       <h2>Total: {{ totalAmount }} INR</h2>
     </div>
   </div>
@@ -47,8 +49,14 @@ const props = defineProps({
   },
 });
 
-const { selectedEvents, selectedExtras, totalAmount } =
-  useQuotationCalculator();
+const {
+  selectedEvents,
+  selectedExtras,
+  subtotal,
+  discountPercentage,
+  discountAmount,
+  totalAmount,
+} = useQuotationCalculator();
 </script>
 
 <style scoped>
