@@ -13,7 +13,7 @@
       <input type="time" id="time" v-model="time" />
     </div>
     <div class="form-group">
-      <label for="personName">Person Name:</label>
+      <label for="personName">Party Name:</label>
       <input type="text" id="personName" v-model="personName" required />
     </div>
     <button type="submit" class="submit-button">Next</button>
@@ -62,7 +62,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 95%;
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
