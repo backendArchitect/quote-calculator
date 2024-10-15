@@ -1,5 +1,11 @@
 <template>
   <div class="price-list">
+    <nav class="navigation">
+      <NuxtLink to="/" class="nav-button home-button">Home</NuxtLink>
+      <NuxtLink to="/pricing" class="nav-button pricing-button"
+        >Pricing</NuxtLink
+      >
+    </nav>
     <h1>Event Photography and Videography Price List</h1>
 
     <section class="events">
@@ -154,5 +160,44 @@ tr:hover {
   td {
     padding: 8px;
   }
+
+  .navigation {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #ffffff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.home-button {
+  background-color: #3498db;
+}
+
+.home-button:hover {
+  background-color: #2980b9;
+}
+
+.pricing-button {
+  background-color: #2ecc71;
+}
+
+.pricing-button:hover {
+  background-color: #27ae60;
 }
 </style>
