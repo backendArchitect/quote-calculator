@@ -36,6 +36,9 @@
       <h3>Discount ({{ discountPercentage }}%): {{ discountAmount }} INR</h3>
       <h2>Total: {{ totalAmount }} INR</h2>
     </div>
+    <button @click="printQuotation" class="print-button">
+      Print Quotation
+    </button>
   </div>
 </template>
 
@@ -57,6 +60,10 @@ const {
   discountAmount,
   totalAmount,
 } = useQuotationCalculator();
+
+function printQuotation() {
+  window.print();
+}
 </script>
 
 <style scoped>
@@ -94,4 +101,42 @@ li {
   font-weight: bold;
   margin-top: 20px;
 }
-</style>
+
+.print-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.print-button:hover {
+  background-color: #45a049;
+}
+
+@media print {
+  .quotation-summary {
+    max-width: 100%;
+  }
+
+  .print-button {
+    display: none;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .form-data-summary,
+  .event-summary,
+  .extras-summary {
+    break-inside: avoid;
+  }
+}
+</style>  
